@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require "dotenv/load"
+require "twitch/chat"
+
+client = Twitch::Chat::Client.new(
+  channel: ENV["TWITCH_CHANNEL"],
+  nickname: ENV["TWITCH_USERNAME"],
+  password: ENV["TWITCH_PASSWORD"],
+) do
+  on(:connected) do
+    send_message "Hi guys!"
+  end
+
+  on(:subscribe) do |user|
+    client.send_message "Hi #{user}, thank you for your subscription"
+  end
+
+  on(:slow_mode) do
+    send_message "Slow down guys"
+  end
+
+  on(:subscribers_mode_off) do
+    send_message "FREEEEEDOOOOOM"
+  end
+
+  on(:message) do |message|
+    send_message "Current time: #{Time.now.utc}" if message.text == '!time'
+  end
+
+  on(:message) do |message|
+    send_message "Hi #{message.user}!" if message.text.include?("Hi fullstacklive")
+  end
+
+  on(:message) do |message|
+    send_message channel.moderators.join(', ') if message.text == '!moderators'
+  end
+
+  on(:new_moderator) do |user|
+    send_message "#{user} is our new moderator"
+  end
+
+  on(:remove_moderator) do |user|
+    send_message "#{user} is no longer moderator"
+  end
+
+  on(:disconnect) do
+    send_message 'Bye guys!'
+  end
+end
+
+client.run!
