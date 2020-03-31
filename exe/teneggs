@@ -5,6 +5,7 @@
 require "dotenv/load"
 require "twitch/chat"
 
+# rubocop:disable Metrics/BlockLength FIXME
 client = Twitch::Chat::Client.new(
   channel: ENV["TWITCH_CHANNEL"],
   nickname: ENV["TWITCH_USERNAME"],
@@ -27,15 +28,19 @@ client = Twitch::Chat::Client.new(
   end
 
   on(:message) do |message|
-    send_message "Current time: #{Time.now.utc}" if message.text == '!time'
+    send_message "Current time: #{Time.now.utc}" if message.text == "!time"
   end
 
   on(:message) do |message|
-    send_message "Hi #{message.user}!" if message.text.include?("Hi fullstacklive")
+    if message.text.include?("Hi fullstacklive")
+      send_message "Hi #{message.user}!"
+    end
   end
 
   on(:message) do |message|
-    send_message channel.moderators.join(', ') if message.text == '!moderators'
+    if message.text == "!moderators"
+      send_message channel.moderators.join(", ")
+    end
   end
 
   on(:new_moderator) do |user|
@@ -47,8 +52,9 @@ client = Twitch::Chat::Client.new(
   end
 
   on(:disconnect) do
-    send_message 'Bye guys!'
+    send_message "Bye guys!"
   end
 end
+# rubocop:enable Metrics/BlockLength
 
 client.run!

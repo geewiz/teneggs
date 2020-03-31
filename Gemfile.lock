@@ -1,14 +1,14 @@
 PATH
   remote: ../twitch-chat
   specs:
-    twitch-chat (0.0.2)
+    twitch-chat (1.0.0)
 
 PATH
   remote: .
   specs:
     teneggs (0.1.0)
       dotenv
-      twitch-chat (~> 0.0.2)
+      twitch-chat (>= 0.0.2)
 
 GEM
   remote: https://rubygems.org/

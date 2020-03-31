@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "dotenv"
-  spec.add_dependency "twitch-chat", "~> 0.0.2"
+  spec.add_dependency "twitch-chat", ">= 0.0.2"
 
   spec.add_development_dependency "freistil-rubocop"
 end
