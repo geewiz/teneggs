@@ -3,9 +3,9 @@
 # frozen_string_literal: true
 
 require "dotenv/load"
-require "twitch/chat"
+require "twitch/bot"
 
-class JoinHandler < Twitch::Chat::EventHandler
+class JoinHandler < Twitch::Bot::EventHandler
   def call
     client.send_message "Hi guys!"
   end
@@ -15,7 +15,7 @@ class JoinHandler < Twitch::Chat::EventHandler
   end
 end
 
-class SubscriptionHandler < Twitch::Chat::EventHandler
+class SubscriptionHandler < Twitch::Bot::EventHandler
   def call
     client.send_message "Hi #{event.user}, thank you for your subscription"
   end
@@ -25,7 +25,7 @@ class SubscriptionHandler < Twitch::Chat::EventHandler
   end
 end
 
-class TimeCommandHandler < Twitch::Chat::EventHandler
+class TimeCommandHandler < Twitch::Bot::EventHandler
   def call
     if event.bot_command?("time")
       client.send_message "Current time: #{Time.now.utc}"
@@ -37,12 +37,12 @@ class TimeCommandHandler < Twitch::Chat::EventHandler
   end
 end
 
-connection = Twitch::Chat::Connection.new(
+connection = Twitch::Bot::Connection.new(
   nickname: ENV["TWITCH_USERNAME"],
   password: ENV["TWITCH_PASSWORD"],
 )
 
-client = Twitch::Chat::Client.new(
+client = Twitch::Bot::Client.new(
   connection: connection,
   channel: ENV["TWITCH_CHANNEL"],
 ) do
