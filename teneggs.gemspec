@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "twitch-bot", "~> 1.0"
 
   spec.add_development_dependency "freistil-rubocop"
+  spec.add_development_dependency "rspec"
 end

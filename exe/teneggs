@@ -4,36 +4,39 @@
 
 require "dotenv/load"
 require "twitch/bot"
+require_relative "../lib/teneggs"
 
-class JoinHandler < Twitch::Bot::EventHandler
-  def call
-    client.send_message "Hi guys!"
-  end
+module Teneggs
+  class JoinHandler < Twitch::Bot::EventHandler
+    def call
+      client.send_message "Hi guys!"
+    end
 
-  def self.handled_events
-    [:join]
-  end
-end
-
-class SubscriptionHandler < Twitch::Bot::EventHandler
-  def call
-    client.send_message "Hi #{event.user}, thank you for your subscription"
-  end
-
-  def self.handled_events
-    [:subscription]
-  end
-end
-
-class TimeCommandHandler < Twitch::Bot::EventHandler
-  def call
-    if event.bot_command?("time")
-      client.send_message "Current time: #{Time.now.utc}"
+    def self.handled_events
+      [:join]
     end
   end
 
-  def self.handled_events
-    [:chat_message]
+  class SubscriptionHandler < Twitch::Bot::EventHandler
+    def call
+      client.send_message "Hi #{event.user}, thank you for your subscription"
+    end
+
+    def self.handled_events
+      [:subscription]
+    end
+  end
+
+  class TimeCommandHandler < Twitch::Bot::EventHandler
+    def call
+      if event.bot_command?("time")
+        client.send_message "Current time: #{Time.now.utc}"
+      end
+    end
+
+    def self.handled_events
+      [:chat_message]
+    end
   end
 end
 
@@ -46,41 +49,10 @@ client = Twitch::Bot::Client.new(
   connection: connection,
   channel: ENV["TWITCH_CHANNEL"],
 ) do
-  register_handler(JoinHandler)
-  register_handler(SubscriptionHandler)
-  register_handler(TimeCommandHandler)
-
-  # on(:slow_mode) do
-  #   send_message "Slow down guys"
-  # end
-
-  # on(:subscribers_mode_off) do
-  #   send_message "FREEEEEDOOOOOM"
-  # end
-
-  # on(:message) do |message|
-  #   if message.text.include?("Hi fullstacklive")
-  #     send_message "Hi #{message.user}!"
-  #   end
-  # end
-
-  # on(:message) do |message|
-  #   if message.text == "!moderators"
-  #     send_message channel.moderators.join(", ")
-  #   end
-  # end
-
-  # on(:new_moderator) do |user|
-  #   send_message "#{user} is our new moderator"
-  # end
-
-  # on(:remove_moderator) do |user|
-  #   send_message "#{user} is no longer moderator"
-  # end
-
-  # on(:disconnect) do
-  #   send_message "Bye guys!"
-  # end
+  register_handler(Teneggs::JoinHandler)
+  register_handler(Teneggs::SubscriptionHandler)
+  register_handler(Teneggs::TimeCommandHandler)
+  register_handler(Teneggs::PlanCommandHandler)
 end
 
 client.run
