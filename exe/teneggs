@@ -53,6 +53,7 @@ client = Twitch::Bot::Client.new(
   register_handler(Teneggs::SubscriptionHandler)
   register_handler(Teneggs::TimeCommandHandler)
   register_handler(Teneggs::PlanCommandHandler)
+  register_handler(Teneggs::QuoteCommandHandler)
 end
 
 client.run

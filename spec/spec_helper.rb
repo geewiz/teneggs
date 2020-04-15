@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require "bundler/setup"
-require "teneggs"
+require "pry-byebug"
+require_relative "../lib/teneggs"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
