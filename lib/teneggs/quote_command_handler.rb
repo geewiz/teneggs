@@ -25,11 +25,11 @@ module Teneggs
     }.freeze
 
     def quote_text
-      quote = event.command_args.first
-      if quote
-        QUOTES[quote]
+      quote_name = event.command_args.first
+      if quote_name
+        QUOTES[quote_name] || "Error: Quote not found."
       else
-        "Quote name missing!"
+        "Error: Quote name missing!"
       end
     end
   end
