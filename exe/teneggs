@@ -9,7 +9,7 @@ require_relative "../lib/teneggs"
 module Teneggs
   class JoinHandler < Twitch::Bot::EventHandler
     def call
-      client.send_message "Hi guys!"
+      client.send_message "READY."
     end
 
     def self.handled_events
@@ -29,13 +29,13 @@ module Teneggs
 
   class TimeCommandHandler < Twitch::Bot::EventHandler
     def call
-      if event.bot_command?("time")
+      if event.command_name?("time")
         client.send_message "Current time: #{Time.now.utc}"
       end
     end
 
     def self.handled_events
-      [:chat_message]
+      [:user_message]
     end
   end
 end
