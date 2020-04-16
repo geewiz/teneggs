@@ -7,5 +7,4 @@ require_relative "teneggs/quote_command_handler"
 
 module Teneggs
   class Error < StandardError; end
-  # Your code goes here...
 end
