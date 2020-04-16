@@ -45,9 +45,12 @@ connection = Twitch::Bot::Connection.new(
   password: ENV["TWITCH_PASSWORD"],
 )
 
+logfile = File.open("teneggs.log", "w")
+
 client = Twitch::Bot::Client.new(
   connection: connection,
   channel: ENV["TWITCH_CHANNEL"],
+  output: logfile,
 ) do
   register_handler(Teneggs::JoinHandler)
   register_handler(Teneggs::SubscriptionHandler)
