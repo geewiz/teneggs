@@ -4,11 +4,11 @@ module Teneggs
   # This class implements the !plan command.
   class PlanCommandHandler < Twitch::Bot::EventHandler
     def self.handled_events
-      [:chat_message]
+      [:user_message]
     end
 
     def call
-      if event.command_name?("plan")
+      if event.command? && command_aliases.include?(event.command)
         output_plan_file
       end
     end
@@ -16,6 +16,10 @@ module Teneggs
     private
 
     PLAN_FILE = File.expand_path("~/.plan")
+
+    def command_aliases
+      %w[plan project]
+    end
 
     def output_plan_file
       client.send_message plan_file_content
