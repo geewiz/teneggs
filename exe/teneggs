@@ -4,6 +4,7 @@
 
 require "dotenv/load"
 require "twitch/bot"
+require "pry-byebug"
 require_relative "../lib/teneggs"
 
 module Teneggs
@@ -40,17 +41,29 @@ module Teneggs
   end
 end
 
+def logfile
+  if ENV["BOT_LOGFILE"]
+    File.new(ENV["BOT_LOGFILE"], "w")
+  else
+    STDOUT
+  end
+end
+
+def loglevel
+  (ENV["BOT_LOGLEVEL"] || "info").to_sym
+end
+
 connection = Twitch::Bot::Connection.new(
   nickname: ENV["TWITCH_USERNAME"],
   password: ENV["TWITCH_PASSWORD"],
 )
 
-logfile = File.open("teneggs.log", "w")
+Twitch::Bot::Logger.output = logfile
+Twitch::Bot::Logger.level = loglevel
 
 client = Twitch::Bot::Client.new(
   connection: connection,
   channel: ENV["TWITCH_CHANNEL"],
-  output: logfile,
 ) do
   register_handler(Teneggs::JoinHandler)
   register_handler(Teneggs::SubscriptionHandler)

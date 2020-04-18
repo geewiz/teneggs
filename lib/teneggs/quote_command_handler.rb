@@ -22,6 +22,9 @@ module Teneggs
       "seniorasshole" => <<~QUOTE,
         "If you can't forgive a junior admitting a mistake, you are no longer a senior developer but a senior asshole." -- FullStackLive 2020-04-15
       QUOTE
+      "comments" => <<~QUOTE,
+        "https://clips.twitch.tv/MotionlessInexpensiveLeopardPermaSmug"
+      QUOTE
     }.freeze
 
     def quote_text
