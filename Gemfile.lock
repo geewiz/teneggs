@@ -78,7 +78,7 @@ GEM
       yard (~> 0.9)
     thor (1.0.1)
     tilt (2.0.10)
-    twitch-bot (2.1.0)
+    twitch-bot (2.1.1)
     unicode-display_width (1.7.0)
     yard (0.9.24)
 
