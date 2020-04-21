@@ -53,17 +53,34 @@ def loglevel
   (ENV["BOT_LOGLEVEL"] || "info").to_sym
 end
 
-connection = Twitch::Bot::Connection.new(
-  nickname: ENV["TWITCH_USERNAME"],
-  password: ENV["TWITCH_PASSWORD"],
+def development_mode?
+  ENV["BOT_MODE"] == "development"
+end
+
+adapter_class = if development_mode?
+                  "Twitch::Bot::Adapter::Terminal"
+                else
+                  "Twitch::Bot::Adapter::Irc"
+                end
+
+config = Twitch::Bot::Config.new(
+  settings: {
+    botname: ENV["TWITCH_USERNAME"],
+    irc: {
+      nickname: ENV["TWITCH_USERNAME"],
+      password: ENV["TWITCH_PASSWORD"],
+    },
+    adapter: adapter_class,
+    log: {
+      file: logfile,
+      level: loglevel,
+    },
+  },
 )
 
-Twitch::Bot::Logger.output = logfile
-Twitch::Bot::Logger.level = loglevel
-
 client = Twitch::Bot::Client.new(
-  connection: connection,
   channel: ENV["TWITCH_CHANNEL"],
+  config: config,
 ) do
   register_handler(Teneggs::JoinHandler)
   register_handler(Teneggs::SubscriptionHandler)

@@ -6,13 +6,19 @@ RSpec.describe Teneggs::PlanCommandHandler do
       text: "!plan",
       user: "tester",
     )
-    client = Twitch::Bot::Client.new(connection: nil, channel: "testchannel")
+    config = Twitch::Bot::Config.new(
+      settings: {
+        bot_name: "test",
+      },
+    )
+    client = Twitch::Bot::Client.new(config: config, channel: "testchannel")
     allow(client).to receive(:send_message)
     handler = described_class.new(event: message, client: client)
     allow(handler).to receive(:plan_file_content).and_return("Hello")
 
     handler.call
 
-    expect(client).to have_received(:send_message).with("Hello")
+    expect(client).to have_received(:send_message).
+      with("testchannel's plan: Hello")
   end
 end

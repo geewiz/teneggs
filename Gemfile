@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "dotenv"
-gem "twitch-bot", "~> 2.0"
+gem "twitch-bot", "~> 3.0"
 
 group :development do
   gem "freistil-rubocop"

@@ -22,7 +22,7 @@ module Teneggs
     end
 
     def output_plan_file
-      client.send_message plan_file_content
+      client.send_message "#{client.channel.name}'s plan: #{plan_file_content}"
     end
 
     def plan_file_content
