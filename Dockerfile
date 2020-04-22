@@ -1,15 +1,15 @@
-FROM ruby:2.6.2
+FROM ruby:2.6.5
 
 RUN apt-get update -qq && apt-get install -y \
-  build-essential
+    build-essential
 
-RUN mkdir /app
-WORKDIR /app
+ENV APP_PATH=/app
+RUN mkdir $APP_PATH
+WORKDIR $APP_PATH
 
 RUN gem install bundler
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
+ADD Gemfile $APP_PATH/Gemfile
+ADD Gemfile.lock $APP_PATH/Gemfile.lock
 RUN bundle install
 
-ADD . /app
-
+ADD . $APP_PATH

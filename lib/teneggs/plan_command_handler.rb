@@ -9,7 +9,7 @@ module Teneggs
 
     def call
       if event.command? && command_aliases.include?(event.command)
-        output_plan_file
+        handle_plan_command
       end
     end
 
@@ -21,8 +21,33 @@ module Teneggs
       %w[plan project]
     end
 
-    def output_plan_file
-      client.send_message "#{client.channel.name}'s plan: #{plan_file_content}"
+    def handle_plan_command
+      args = event.command_args
+      subcommand = args.shift
+      if subcommand == "set"
+        if update_allowed?
+          plan = args.join(" ")
+          update_plan(plan)
+        else
+          client.send_message "Permission denied."
+        end
+      else
+        announce_plan
+      end
+    end
+
+    def update_allowed?
+      event.user == client.channel.name
+    end
+
+    def update_plan(plan)
+      client.memory.store("plan", plan)
+      client.send_message "Plan set to '#{plan}'"
+    end
+
+    def announce_plan
+      plan = client.memory.retrieve("plan")
+      client.send_message "#{client.channel.name}'s plan: #{plan}"
     end
 
     def plan_file_content
