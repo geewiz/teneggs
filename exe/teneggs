@@ -4,7 +4,6 @@
 
 require "dotenv/load"
 require "twitch/bot"
-require "pry-byebug"
 require_relative "../lib/teneggs"
 
 module Teneggs
