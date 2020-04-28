@@ -27,6 +27,7 @@ module Teneggs
             password: ENV["TWITCH_PASSWORD"],
           },
           adapter: adapter_class,
+          memory: "Twitch::Bot::Memory::Redis",
           log: {
             file: logfile,
             level: loglevel,
