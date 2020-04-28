@@ -79,7 +79,7 @@ GEM
       yard (~> 0.9)
     thor (1.0.1)
     tilt (2.0.10)
-    twitch-bot (3.2.1)
+    twitch-bot (4.0.0)
       redis (~> 4.1)
     unicode-display_width (1.7.0)
     yard (0.9.24)
@@ -94,7 +94,7 @@ DEPENDENCIES
   reek (~> 6.0)
   rspec (~> 3.0)
   solargraph
-  twitch-bot (~> 3.1)
+  twitch-bot (~> 4.0)
 
 BUNDLED WITH
    2.1.4
