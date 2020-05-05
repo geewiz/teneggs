@@ -7,6 +7,7 @@ require_relative "teneggs/join_handler"
 require_relative "teneggs/subscription_handler"
 require_relative "teneggs/plan_command_handler"
 require_relative "teneggs/quote_command_handler"
+require_relative "teneggs/defend_command_handler"
 
 module Teneggs
   class Error < StandardError; end
@@ -43,6 +44,7 @@ module Teneggs
         register_handler(Teneggs::SubscriptionHandler)
         register_handler(Teneggs::PlanCommandHandler)
         register_handler(Teneggs::QuoteCommandHandler)
+        register_handler(Teneggs::DefendCommandHandler)
       end
     end
 
