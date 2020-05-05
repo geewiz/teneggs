@@ -2,21 +2,17 @@
 
 module Teneggs
   # Implements the !defend command
-  class DefendCommandHandler < Twitch::Bot::EventHandler
-    def self.handled_events
-      [:user_message]
-    end
-
-    def call
-      if event.command? && command_aliases.include?(event.command)
-        client.send_message(response_text)
-      end
+  class DefendCommandHandler < Twitch::Bot::CommandHandler
+    def initialize(event:, client:)
+      super
+      command_alias("defend")
+      command_alias("defense")
     end
 
     private
 
-    def command_aliases
-      %w[defend defense]
+    def handle_command
+      client.send_message(response_text)
     end
 
     def response_text
