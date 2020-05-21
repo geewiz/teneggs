@@ -12,26 +12,26 @@ module Teneggs
     private
 
     def handle_command
-      client.send_message(response_text)
+      client.send_message("@#{event.user}, #{response_text}")
     end
 
     def response_text
       [
-        "iptables -A INPUT -p tcp -s twitch.tv --dport 22 -j DROP",
-        "service fail2ban start",
-        "Encrypting sensitive files...",
-        "Down dialup lines shut down.",
-        "Scanning logs...",
+        "reconfiguring firewall.",
+        "fail2ban enabled.",
+        "encrypting sensitive files.",
+        "dialup lines shut down.",
+        "scanning logs...",
         "Intrusion Detection System started.",
-        "Refreshing API tokens...",
-        "Reshuffling BGP tables...",
-        "Honeypot enabled.",
-        "Switching to backup power.",
-        "Going to DEFCON-1.",
-        "Shredding incriminating documents...",
-        "Fallback to secondary data centre initiated.",
-        "Calling up tape archives.",
-        "Alerting on-call staff...",
+        "refreshing API tokens.",
+        "reshuffling BGP tables.",
+        "honeypot enabled.",
+        "switching to backup power.",
+        "going to DEFCON-1!",
+        "shredding incriminating documents.",
+        "fallback to secondary data centre initiated.",
+        "syncing tape archive.",
+        "alerting on-call staff.",
       ].sample
     end
   end

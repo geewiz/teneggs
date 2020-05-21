@@ -19,6 +19,6 @@ RSpec.describe Teneggs::DefendCommandHandler do
     handler.call
 
     expect(client).to have_received(:send_message).
-      with("Ha!")
+      with("@tester, Ha!")
   end
 end
