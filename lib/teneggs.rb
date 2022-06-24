@@ -9,6 +9,7 @@ require_relative "teneggs/plan_command_handler"
 require_relative "teneggs/quote_command_handler"
 require_relative "teneggs/defend_command_handler"
 require_relative "teneggs/attack_command_handler"
+require_relative "teneggs/shoutout_handler"
 
 module Teneggs
   class Error < StandardError; end
