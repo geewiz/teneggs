@@ -15,8 +15,6 @@ module Teneggs
 
     private
 
-    PLAN_FILE = File.expand_path("~/.plan")
-
     def command_aliases
       %w[plan project]
     end
@@ -48,14 +46,6 @@ module Teneggs
     def announce_plan
       plan = client.memory.retrieve("plan")
       client.send_message "#{client.channel.name}'s plan: #{plan}"
-    end
-
-    def plan_file_content
-      if File.exist?(PLAN_FILE)
-        File.read(PLAN_FILE)
-      else
-        "Error: Plan file missing!"
-      end
     end
   end
 end

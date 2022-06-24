@@ -14,9 +14,8 @@ RSpec.describe Teneggs::PlanCommandHandler do
     client = Twitch::Bot::Client.new(config: config, channel: "testchannel")
     allow(client).to receive(:send_message)
     client.memory.store("plan", "Hello")
-    handler = described_class.new(event: message, client: client)
 
-    handler.call
+    described_class.new(event: message, client: client).call
 
     expect(client).to have_received(:send_message).
       with("testchannel's plan: Hello")
