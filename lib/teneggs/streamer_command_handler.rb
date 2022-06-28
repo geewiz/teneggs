@@ -26,6 +26,7 @@ module Teneggs
           user = args.shift
           streamers = Data::Streamers.new(client: client)
           streamers.add(user)
+          client.send_message "Added #{user} to the streamer list."
         else
           client.send_message "Permission denied."
         end
@@ -34,6 +35,7 @@ module Teneggs
           user = args.shift
           streamers = Data::Streamers.new(client: client)
           streamers.remove(user)
+          client.send_message "Removed #{user} from the streamer list."
         else
           client.send_message "Permission denied."
         end
