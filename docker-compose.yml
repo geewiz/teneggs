@@ -1,13 +1,5 @@
 version: "3"
 
 services:
-  lita:
-    build: .
-    command: bundle exec lita
-    depends_on:
-      - redis
-    stdin_open: true
-    tty: true
   redis:
     image: redis
-

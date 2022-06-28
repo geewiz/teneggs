@@ -26,9 +26,11 @@ module Teneggs
         register_handler(Teneggs::JoinHandler)
         register_handler(Teneggs::SubscriptionHandler)
         register_handler(Teneggs::PlanCommandHandler)
+        register_handler(Teneggs::StreamerCommandHandler)
         register_handler(Teneggs::QuoteCommandHandler)
         register_handler(Teneggs::DefendCommandHandler)
         register_handler(Teneggs::AttackCommandHandler)
+        register_handler(Teneggs::ShoutoutHandler)
       end
     end
 

@@ -22,7 +22,6 @@ module Teneggs
       args = event.command_args
       subcommand = args.shift
       if subcommand == "add"
-        client.send_message "Processing add..."
         if authorized?
           user = args.shift
           streamers = Data::Streamers.new(client: client)
@@ -32,7 +31,6 @@ module Teneggs
           client.send_message "Permission denied."
         end
       elsif subcommand == "rm"
-        client.send_message "Processing remove..."
         if authorized?
           user = args.shift
           streamers = Data::Streamers.new(client: client)
