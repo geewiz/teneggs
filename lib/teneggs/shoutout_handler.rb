@@ -22,10 +22,8 @@ module Teneggs
     COOLDOWN_PERIOD = 3600
 
     def shoutout(user)
-      client.send_message "Shoutout to #{user}!"
-    end
-
-    def streamer_friend?(user)
+      client.send_message "Make sure to follow @#{user}, "\
+                          "one of #{client.channel.name}'s favourite streamers!"
     end
   end
 end

@@ -35,7 +35,7 @@ module Teneggs
       end
 
       def retrieve_last_seen_data
-        @client.memory.retrieve(MEMORY_KEY) || Hash.new
+        @client.memory.retrieve(MEMORY_KEY) || {}
       end
 
       def store_last_seen_data(last_seen_data)

@@ -20,7 +20,7 @@ RSpec.describe Teneggs::ShoutoutHandler do
     described_class.new(event: message, client: client).call
 
     expect(client).to have_received(:send_message).
-      with("Shoutout to friend!")
+      with(/@friend/)
   end
 
   it "skips shoutout to chatty friends" do
@@ -42,7 +42,7 @@ RSpec.describe Teneggs::ShoutoutHandler do
     described_class.new(event: message, client: client).call
 
     expect(client).not_to have_received(:send_message).
-      with("Shoutout to friend!")
+      with(/@friend/)
   end
 
   it "does not shout to non-friends" do
@@ -64,6 +64,6 @@ RSpec.describe Teneggs::ShoutoutHandler do
     described_class.new(event: message, client: client).call
 
     expect(client).not_to have_received(:send_message).
-      with("Shoutout to friend!")
+      with(/@friend/)
   end
 end

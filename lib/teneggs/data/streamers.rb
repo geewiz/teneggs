@@ -29,7 +29,7 @@ module Teneggs
       MEMORY_KEY = "streamer_friends"
 
       def retrieve_friends
-        @client.memory.retrieve(MEMORY_KEY) || Hash.new
+        @client.memory.retrieve(MEMORY_KEY) || {}
       end
 
       def store_friends(friends)
