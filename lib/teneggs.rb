@@ -6,10 +6,13 @@ require_relative "teneggs/version"
 require_relative "teneggs/join_handler"
 require_relative "teneggs/subscription_handler"
 require_relative "teneggs/plan_command_handler"
+require_relative "teneggs/streamer_command_handler"
 require_relative "teneggs/quote_command_handler"
 require_relative "teneggs/defend_command_handler"
 require_relative "teneggs/attack_command_handler"
 require_relative "teneggs/shoutout_handler"
+require_relative "teneggs/data/streamers"
+require_relative "teneggs/data/user_cooldowns"
 
 module Teneggs
   class Error < StandardError; end

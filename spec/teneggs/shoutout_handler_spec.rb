@@ -9,8 +9,9 @@ RSpec.describe Teneggs::ShoutoutHandler do
     )
     client = Twitch::Bot::Client.new(config: config, channel: "testchannel")
     allow(client).to receive(:send_message)
-    client.memory.store("streamer_friends", { "friend" => true })
-    client.memory.store("last_seen", { "friend" => Time.now - 86400 })
+    Teneggs::Data::Streamers.new(client: client).add("friend")
+    Teneggs::Data::UserCooldowns.new(client: client, cooldown: "shoutout").
+      clear("friend")
     message = Twitch::Bot::Message::UserMessage.new(
       text: "hello",
       user: "friend",
@@ -30,8 +31,9 @@ RSpec.describe Teneggs::ShoutoutHandler do
     )
     client = Twitch::Bot::Client.new(config: config, channel: "testchannel")
     allow(client).to receive(:send_message)
-    client.memory.store("streamer_friends", { "friend" => true })
-    client.memory.store("last_seen", { "friend" => Time.now - 30 })
+    Teneggs::Data::Streamers.new(client: client).add("friend")
+    Teneggs::Data::UserCooldowns.new(client: client, cooldown: "shoutout").
+      start("friend")
     message = Twitch::Bot::Message::UserMessage.new(
       text: "hello",
       user: "friend",
@@ -51,16 +53,17 @@ RSpec.describe Teneggs::ShoutoutHandler do
     )
     client = Twitch::Bot::Client.new(config: config, channel: "testchannel")
     allow(client).to receive(:send_message)
-    client.memory.store("streamer_friends", { "friend" => true })
-    client.memory.store("last_seen", { "nonfriend" => Time.now - 86400 })
+    Teneggs::Data::Streamers.new(client: client).remove("friend")
+    Teneggs::Data::UserCooldowns.new(client: client, cooldown: "shoutout").
+      clear("friend")
     message = Twitch::Bot::Message::UserMessage.new(
       text: "hello",
-      user: "nonfriend",
+      user: "friend",
     )
 
     described_class.new(event: message, client: client).call
 
     expect(client).not_to have_received(:send_message).
-      with("Shoutout to nonfriend!")
+      with("Shoutout to friend!")
   end
 end
