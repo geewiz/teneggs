@@ -23,7 +23,8 @@ module Teneggs
 
     def shoutout(user)
       client.send_message "Make sure to follow @#{user}, "\
-                          "one of #{client.channel.name}'s favourite streamers!"
+                          "one of #{client.channel.name}'s favourite "\
+                          "streamers! https://www.twitch.tv/#{user}"
     end
   end
 end
