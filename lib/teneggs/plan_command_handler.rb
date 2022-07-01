@@ -2,24 +2,16 @@
 
 module Teneggs
   # This class implements the !plan command.
-  class PlanCommandHandler < Twitch::Bot::EventHandler
-    def self.handled_events
-      [:user_message]
-    end
-
-    def call
-      if event.command? && command_aliases.include?(event.command)
-        handle_plan_command
-      end
+  class PlanCommandHandler < Twitch::Bot::CommandHandler
+    def initialize(event:, client:)
+      super
+      command_alias("plan")
+      command_alias("project")
     end
 
     private
 
-    def command_aliases
-      %w[plan project]
-    end
-
-    def handle_plan_command
+    def handle_command
       args = event.command_args
       subcommand = args.shift
       if subcommand == "set"

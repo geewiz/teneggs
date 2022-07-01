@@ -1,22 +1,13 @@
 # frozen_string_literal: true
 
 module Teneggs
-  class StreamerCommandHandler < Twitch::Bot::EventHandler
-    def self.handled_events
-      [:user_message]
-    end
-
-    def call
-      if event.command? && command_aliases.include?(event.command)
-        handle_command
-      end
+  class StreamerCommandHandler < Twitch::Bot::CommandHandler
+    def initialize(event:, client:)
+      super
+      command_alias "streamer"
     end
 
     private
-
-    def command_aliases
-      %w[streamer]
-    end
 
     def handle_command
       return unless authorized?

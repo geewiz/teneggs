@@ -2,15 +2,10 @@
 
 module Teneggs
   # This class handles the !quote command
-  class QuoteCommandHandler < Twitch::Bot::EventHandler
-    def self.handled_events
-      [:user_message]
-    end
-
-    def call
-      if event.command_name?("quote")
-        client.send_message quote_text
-      end
+  class QuoteCommandHandler < Twitch::Bot::CommandHandler
+    def initialize(event:, client:)
+      super
+      command_alias "quote"
     end
 
     private
@@ -26,6 +21,10 @@ module Teneggs
         "https://clips.twitch.tv/MotionlessInexpensiveLeopardPermaSmug"
       QUOTE
     }.freeze
+
+    def handle_command
+      client.send_message quote_text
+    end
 
     def quote_text
       quote_name = event.command_args.first
