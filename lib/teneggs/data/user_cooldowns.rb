@@ -11,12 +11,12 @@ module Teneggs
       def expired?(user:, duration:)
         last_seen_data = retrieve_last_seen_data
         last_seen = last_seen_data[memory_cell(user)]
-        last_seen.nil? || last_seen < Time.now - duration
+        last_seen.nil? || last_seen.to_i < Time.now.to_i - duration
       end
 
       def start(user)
         last_seen_data = retrieve_last_seen_data
-        last_seen_data[memory_cell(user)] = Time.now
+        last_seen_data[memory_cell(user)] = Time.now.to_i
         store_last_seen_data(last_seen_data)
       end
 
