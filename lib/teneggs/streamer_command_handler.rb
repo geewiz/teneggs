@@ -2,9 +2,8 @@
 
 module Teneggs
   class StreamerCommandHandler < Twitch::Bot::CommandHandler
-    def initialize(event:, client:)
-      super
-      command_alias "streamer"
+    def command_aliases
+      ["streamer"]
     end
 
     private

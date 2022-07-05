@@ -3,10 +3,8 @@
 module Teneggs
   # Implements the !defend command
   class DefendCommandHandler < Twitch::Bot::CommandHandler
-    def initialize(event:, client:)
-      super
-      command_alias("defend")
-      command_alias("defense")
+    def command_aliases
+      ["defend", "defense"]
     end
 
     private

@@ -3,9 +3,8 @@
 module Teneggs
   # This class handles the !quote command
   class QuoteCommandHandler < Twitch::Bot::CommandHandler
-    def initialize(event:, client:)
-      super
-      command_alias "quote"
+    def command_aliases
+      ["quote"]
     end
 
     private

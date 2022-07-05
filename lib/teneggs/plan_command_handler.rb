@@ -3,10 +3,8 @@
 module Teneggs
   # This class implements the !plan command.
   class PlanCommandHandler < Twitch::Bot::CommandHandler
-    def initialize(event:, client:)
-      super
-      command_alias("plan")
-      command_alias("project")
+    def command_aliases
+      ["plan", "project"]
     end
 
     private
