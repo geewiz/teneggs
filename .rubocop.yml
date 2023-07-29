@@ -1,9 +1,5 @@
-inherit_gem:
-  freistil-rubocop:
-    - default.yml
-
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.7
 
 Metrics/BlockLength:
   Exclude:

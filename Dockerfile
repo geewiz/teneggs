@@ -1,4 +1,4 @@
-FROM ruby:2.6.5
+FROM ruby:2.7.5
 
 RUN apt-get update -qq && apt-get install -y \
     build-essential
@@ -13,3 +13,5 @@ ADD Gemfile.lock $APP_PATH/Gemfile.lock
 RUN bundle install
 
 ADD . $APP_PATH
+
+CMD ["bundle", "exec", "exe/teneggs"]

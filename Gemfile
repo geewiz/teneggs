@@ -1,10 +1,9 @@
 source "https://rubygems.org"
 
 gem "dotenv"
-gem "twitch-bot", "~> 6.0"
+gem "twitch-bot", github: "geewiz/twitch-bot", branch: "master"
 
 group :development do
-  gem "freistil-rubocop"
   gem "pry-byebug"
   gem "rake", "~> 13.0"
   gem "reek", "~> 6.0"

@@ -14,7 +14,7 @@ module Teneggs
         "Do not meddle in the affairs of wizards, for they are subtle and quick to anger." -- J.R.R. Tolkien, The Fellowship of the Ring
       QUOTE
       "seniorasshole" => <<~QUOTE,
-        "If you can't forgive a junior admitting a mistake, you are no longer a senior developer but a senior asshole." -- FullStackLive 2020-04-15
+        "If you can't forgive a junior admitting a mistake, you are no longer a senior engineer but a senior asshole." -- FullStackLive 2020-04-15
       QUOTE
       "comments" => <<~QUOTE,
         "https://clips.twitch.tv/MotionlessInexpensiveLeopardPermaSmug"

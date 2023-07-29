@@ -9,7 +9,10 @@ module Teneggs
     private
 
     def handle_command
-      return unless authorized?
+      unless authorized?
+        client.send_message "@#{event.user} This command requires root permissions."
+        return
+      end
 
       args = event.command_args
       subcommand = args.shift
@@ -17,6 +20,8 @@ module Teneggs
         add_streamer(args.shift)
       elsif subcommand == "rm"
         remove_streamer(args.shift)
+      elsif subcommand == "check"
+        check_streamer(args.shift)
       end
     end
 
@@ -34,6 +39,15 @@ module Teneggs
       streamers = Data::Streamers.new(client: client)
       streamers.remove(user)
       client.send_message "Removed #{user} from the streamer list."
+    end
+
+    def check_streamer(user)
+      streamers = Data::Streamers.new(client: client)
+      if streamers.exists?(user)
+        client.send_message "#{user} is on the list"
+      else
+        client.send_message "#{user} is not on the list"
+      end
     end
   end
 end

@@ -17,7 +17,7 @@ module Teneggs
           plan = args.join(" ")
           update_plan(plan)
         else
-          client.send_message "Permission denied."
+          client.send_message "@#{event.user} Permission denied."
         end
       else
         announce_plan
